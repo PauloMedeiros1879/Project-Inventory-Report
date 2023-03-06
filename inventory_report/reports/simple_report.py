@@ -5,7 +5,8 @@ from datetime import datetime
 class SimpleReport(ABC):
     @classmethod
     def convert_date(e, date):
-        # mais sobre o método strptime https://www.programiz.com/python-programming/datetime/strptime
+        # mais sobre o método strptime()
+        # https://www.programiz.com/python-programming/datetime/strptime
         return datetime.strptime(date, "%Y-%m-%d")
 
     @classmethod
@@ -13,21 +14,21 @@ class SimpleReport(ABC):
         old = datetime.max
         nearest = datetime.max
         products = {}
-        for dic in parameter:
+        for dict in parameter:
 
-            old = min(old, e.convert_date(dic["data_de_fabricacao"]))
+            old = min(old, e.convert_date(dict["data_de_fabricacao"]))
 
             nearest = (
-                min(nearest, e.convert_date(dic["data_de_validade"]))
+                min(nearest, e.convert_date(dict["data_de_validade"]))
                 # date.today() método para obter a data local atual.
-                if e.convert_date(dic["data_de_validade"]) > datetime.today()
+                if e.convert_date(dict["data_de_validade"]) > datetime.today()
                 else nearest
             )
 
-            if not dic["nome_da_empresa"] in products:
-                products[dic["nome_da_empresa"]] = 1
+            if not dict["nome_da_empresa"] in products:
+                products[dict["nome_da_empresa"]] = 1
             else:
-                products[dic["nome_da_empresa"]] += 1
+                products[dict["nome_da_empresa"]] += 1
 
         return (
             f"Data de fabricação mais antiga: {old.date()}\n"
