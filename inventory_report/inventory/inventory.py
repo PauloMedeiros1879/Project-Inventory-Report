@@ -2,6 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
 import csv
+import json
 
 
 class Inventory:
@@ -15,6 +16,16 @@ class Inventory:
 
                 products = []
                 for row in csv_reader:
+                    products.append(row)
+            return products
+
+        if path.endswith(".json"):
+            with open(path) as json_file:
+                content = json_file.read()
+                json_data = json.loads(content)
+
+                products = []
+                for row in json_data:
                     products.append(row)
             return products
 
