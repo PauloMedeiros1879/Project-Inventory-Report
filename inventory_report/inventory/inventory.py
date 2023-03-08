@@ -3,7 +3,7 @@ from inventory_report.reports.complete_report import CompleteReport
 
 import csv
 import json
-import xml
+import xmltodict
 
 
 class Inventory:
@@ -24,11 +24,7 @@ class Inventory:
             with open(path) as json_file:
                 content = json_file.read()
                 json_data = json.loads(content)
-
-                products = []
-                for row in json_data:
-                    products.append(row)
-            return products
+            return json_data
 
         if path.endswith(".xml"):
             with open(path) as xml_file:
