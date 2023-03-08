@@ -3,6 +3,7 @@ from inventory_report.reports.complete_report import CompleteReport
 
 import csv
 import json
+import xml
 
 
 class Inventory:
@@ -28,6 +29,12 @@ class Inventory:
                 for row in json_data:
                     products.append(row)
             return products
+
+        if path.endswith(".xml"):
+            with open(path) as xml_file:
+                content = xmltodict.parse(xml_file.read())
+                ["dataset"]["record"]
+                return content
 
     @staticmethod
     def import_data(path, type):
