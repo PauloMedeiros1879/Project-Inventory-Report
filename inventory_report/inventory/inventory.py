@@ -28,8 +28,7 @@ class Inventory:
 
         if path.endswith(".xml"):
             with open(path) as xml_file:
-                content = xmltodict.parse(xml_file.read())
-                ["dataset"]["record"]
+                content = xmltodict.parse(xml_file.read())["dataset"]["record"]
                 return content
 
     @staticmethod
